@@ -1,6 +1,6 @@
-import { Doctor } from '@/API';
-import { DefaultApi } from '@/API/apis/DefaultApi';
-import { useEffect, useState } from 'react';
+import { Doctor } from "@/API";
+import { DefaultApi } from "@/API/apis/DefaultApi";
+import { useEffect, useState } from "react";
 
 const api = new DefaultApi();
 
@@ -11,26 +11,26 @@ export const FormContent = ({
   doctor?: Doctor;
   onUpdate?: (editedDoctor: Doctor) => void;
 }) => {
-  const [buttonText, setButtonText] = useState('Submit');
+  const [buttonText, setButtonText] = useState("Submit");
   const [unsavedChanges, setUnsavedChanges] = useState(false);
   const [formData, setFormData] = useState({
-    name: doctor?.name || '',
-    phone: doctor?.phone || '',
-    email: doctor?.email || '',
+    name: doctor?.name || "",
+    phone: doctor?.phone || "",
+    email: doctor?.email || "",
     id: doctor?.id,
-    street: doctor?.street || '',
-    city: doctor?.city || '',
-    zip: doctor?.zip || '',
-    state: doctor?.state || '',
+    street: doctor?.street || "",
+    city: doctor?.city || "",
+    zip: doctor?.zip || "",
+    state: doctor?.state || "",
   });
 
   useEffect(() => {
     const changesDetected =
       Object.entries(formData).some(
-        ([key, value]) => value !== (doctor?.[key as keyof Doctor] || '')
+        ([key, value]) => value !== (doctor?.[key as keyof Doctor] || ""),
       ) ||
       Object.entries(doctor || {}).some(
-        ([key, value]) => value !== (formData[key as keyof Doctor] || '')
+        ([key, value]) => value !== (formData[key as keyof Doctor] || ""),
       );
 
     setUnsavedChanges(changesDetected);
@@ -57,16 +57,16 @@ export const FormContent = ({
           },
           {
             headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*',
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
             },
-          }
+          },
         );
-        setButtonText('Submitted');
+        setButtonText("Submitted");
 
-        console.log('Doctor updated successfully:', response);
+        console.log("Doctor updated successfully:", response);
       } catch (error) {
-        console.error('Error updating doctor:', error);
+        console.error("Error updating doctor:", error);
       }
     } else {
       try {
@@ -76,20 +76,20 @@ export const FormContent = ({
           },
           {
             headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*',
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
             },
-          }
+          },
         );
-        setButtonText('Submitted');
+        setButtonText("Submitted");
 
-        console.log('Doctor added successfully:', response);
+        console.log("Doctor added successfully:", response);
       } catch (error) {
-        console.error('Error adding doctor:', error);
+        console.error("Error adding doctor:", error);
       }
     }
     setTimeout(() => {
-      setButtonText('Submit');
+      setButtonText("Submit");
     }, 5000);
   };
 
@@ -169,7 +169,7 @@ export const FormContent = ({
       </div>
       <div className="flex justify-center my-5">
         <button
-          disabled={buttonText === 'Submitted' || !unsavedChanges}
+          disabled={buttonText === "Submitted" || !unsavedChanges}
           className="px-2 py-1 w-auto h-auto text-white hover:bg-[#22B3A7] bg-[#344597] hover:text-white rounded-md disabled:bg-gray-200 disabled:text-white"
           type="submit"
         >

@@ -1,4 +1,4 @@
-import { DefaultApi, Doctor } from '@/API';
+import { DefaultApi, Doctor } from "@/API";
 import {
   Dialog,
   DialogClose,
@@ -8,22 +8,22 @@ import {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
-} from '@radix-ui/react-dialog';
+} from "@radix-ui/react-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuPortal,
   DropdownMenuTrigger,
-} from '@radix-ui/react-dropdown-menu';
+} from "@radix-ui/react-dropdown-menu";
 import {
   Cross1Icon,
   DotsVerticalIcon,
   Pencil1Icon,
   TrashIcon,
-} from '@radix-ui/react-icons';
-import { useState } from 'react';
-import { FormContent } from './FormContent';
+} from "@radix-ui/react-icons";
+import { useState } from "react";
+import { FormContent } from "./FormContent";
 
 const api = new DefaultApi();
 
@@ -142,7 +142,7 @@ const Controls = ({
                       onDelete();
                       setDeleteDialogOpen(false);
                     })
-                    .catch(error => {
+                    .catch((error) => {
                       alert(error);
                     });
                 }}

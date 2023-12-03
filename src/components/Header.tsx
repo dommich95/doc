@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import ToggleTheme from './ToggleTheme';
+import Image from "next/image";
+import ToggleTheme from "./ToggleTheme";
 
 export default function Header() {
   return (

@@ -1,14 +1,14 @@
-import React, { useState, useEffect, HTMLAttributes } from 'react';
-import { DefaultApi } from '../API/apis/DefaultApi';
-import { Doctor } from '@/API';
-import Card from '@/components/Card';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
-import { useTheme } from 'next-themes';
-import { AddNewDoctor } from '@/components/AddNewDoc';
-import Slider from 'react-slick';
+import React, { useState, useEffect, HTMLAttributes } from "react";
+import { DefaultApi } from "../API/apis/DefaultApi";
+import { Doctor } from "@/API";
+import Card from "@/components/Card";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick-theme.css";
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import { useTheme } from "next-themes";
+import { AddNewDoctor } from "@/components/AddNewDoc";
+import Slider from "react-slick";
 
 const api = new DefaultApi();
 
@@ -33,7 +33,7 @@ export default function Page({ initaleDoctors }: { initaleDoctors: Doctor[] }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [dataAvailable, setDataAvailable] = useState(true);
   const { theme } = useTheme();
-  const iconColor = theme === 'dark' ? '#22B3A7' : '#344597';
+  const iconColor = theme === "dark" ? "#22B3A7" : "#344597";
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function Page({ initaleDoctors }: { initaleDoctors: Doctor[] }) {
         const initialData = await getDoctors(currentPage);
         setDoctors(initialData as Doctor[]);
       } catch (error) {
-        console.error('Error fetching initial data:', error);
+        console.error("Error fetching initial data:", error);
       } finally {
         setLoading(false);
       }
@@ -59,23 +59,23 @@ export default function Page({ initaleDoctors }: { initaleDoctors: Doctor[] }) {
       const newDoctors = await getDoctors(nextPage);
 
       if (newDoctors && newDoctors.length > 0) {
-        setDoctors(prevDoctors => [...prevDoctors, ...newDoctors]);
+        setDoctors((prevDoctors) => [...prevDoctors, ...newDoctors]);
         setCurrentPage(nextPage);
       } else {
         setDataAvailable(false);
       }
     } catch (error) {
-      console.error('Error fetching next page:', error);
+      console.error("Error fetching next page:", error);
     } finally {
       setLoading(false);
     }
   };
 
   const handleEdit = (editedDoctor: Doctor) => {
-    const index = doctors.findIndex(doctor => doctor.id === editedDoctor.id);
+    const index = doctors.findIndex((doctor) => doctor.id === editedDoctor.id);
 
     if (index !== -1) {
-      setDoctors(prevDoctors => [
+      setDoctors((prevDoctors) => [
         ...prevDoctors.slice(0, index),
         editedDoctor,
         ...prevDoctors.slice(index + 1),
@@ -84,8 +84,8 @@ export default function Page({ initaleDoctors }: { initaleDoctors: Doctor[] }) {
   };
 
   const handleDelete = (doctorId: number) => {
-    setDoctors(prevDoctors =>
-      prevDoctors.filter(doctor => doctor.id !== doctorId)
+    setDoctors((prevDoctors) =>
+      prevDoctors.filter((doctor) => doctor.id !== doctorId),
     );
   };
 
@@ -99,7 +99,7 @@ export default function Page({ initaleDoctors }: { initaleDoctors: Doctor[] }) {
         fetchNextPage();
       }
     },
-    responsive: breakpoints.map(breakpoint => ({
+    responsive: breakpoints.map((breakpoint) => ({
       breakpoint: breakpoint.breakpoint,
       settings: breakpoint.settings,
     })),
@@ -109,7 +109,7 @@ export default function Page({ initaleDoctors }: { initaleDoctors: Doctor[] }) {
     <div className="w-auto max-w-[1300px] m-auto mt-10 px-5">
       {doctors && doctors.length > 0 && (
         <Slider {...sliderSettings} className="rounded-xl relative">
-          {doctors.map(doctor => (
+          {doctors.map((doctor) => (
             <Card
               key={doctor.id}
               doctor={doctor}
@@ -159,7 +159,7 @@ export async function getServerSideProps() {
       },
     };
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error("Error fetching data:", error);
     return {
       props: {
         doctors: [],

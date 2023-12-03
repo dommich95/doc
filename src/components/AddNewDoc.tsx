@@ -6,9 +6,9 @@ import {
   DialogOverlay,
   DialogTitle,
   DialogTrigger,
-} from '@radix-ui/react-dialog';
-import { FormContent } from './FormContent';
-import { Cross1Icon } from '@radix-ui/react-icons';
+} from "@radix-ui/react-dialog";
+import { FormContent } from "./FormContent";
+import { Cross1Icon } from "@radix-ui/react-icons";
 
 export const AddNewDoctor = () => {
   return (
